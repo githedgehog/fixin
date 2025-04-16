@@ -1,0 +1,17 @@
+[package]
+name = "fixin"
+version = "0.0.1"
+authors = ["Daniel Noland <daniel@githedgehog.com>"]
+description = "simple rust decorator library"
+keywords = ["template", "proc_macro", "procmacro", "decorator"]
+edition = "2024"
+license = "Apache-2.0"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro-error2 = { version = "2.0.1", default-features = false, features = [] }
+quote = { version = "1.0.40", default-features = false, features = [] }
+syn =  { version = "2.0.100", default-features = false, features = ["proc-macro", "parsing"] }
+
