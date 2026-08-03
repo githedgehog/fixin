@@ -113,7 +113,7 @@ use syn::{ExprCall, ItemFn, parse_macro_input};
 /// }
 /// ```
 #[proc_macro_attribute]
-#[proc_macro_error2::proc_macro_error]
+#[proc_macro_error3::proc_macro_error]
 pub fn wrap(args: TokenStream, input: TokenStream) -> TokenStream {
     let args = parse_macro_input!(args as ExprCall);
 
