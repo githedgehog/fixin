@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright Open Network Fabric Authors
 
+// We want to show how we decorate tests, so we need to use #[test] in docs snippets; they're not
+// supposed to be doctests we would run.
+#![allow(clippy::test_attr_in_doctest)]
+
 //! `fixin` is a very simple test fixture tool.
 //!
 //! The idea is to wrap arbitrary tests in other functions (which are responsible for setup and
