@@ -58,13 +58,13 @@ use syn::{ExprCall, ItemFn, parse_macro_input};
 /// Imagine you have
 ///
 /// ```
-/// # struct SetupParms;
+/// # struct SetupParams;
 /// # struct TeardownParams;
-/// # fn do_setup(_: SetupParms) {}
+/// # fn do_setup(_: SetupParams) {}
 /// # fn do_teardown(_: TeardownParams) {}
 /// #[test]
 /// fn test_which_needs_setup_and_teardown() {
-///     do_setup(SetupParms);
+///     do_setup(SetupParams);
 ///     // ... test logic ...
 ///     do_teardown(TeardownParams);
 /// }
@@ -82,14 +82,14 @@ use syn::{ExprCall, ItemFn, parse_macro_input};
 /// Then you can write
 ///
 /// ```
-/// # struct SetupParms;
+/// # struct SetupParams;
 /// # struct TeardownParams;
-/// # fn do_setup(_: SetupParms) {}
+/// # fn do_setup(_: SetupParams) {}
 /// # fn do_teardown(_: TeardownParams) {}
 /// # use std::panic::{catch_unwind, RefUnwindSafe, UnwindSafe};
 ///
 /// fn with_setup_and_teardown<F: UnwindSafe + FnOnce() -> T, T>(
-///     setup_params: SetupParms,
+///     setup_params: SetupParams,
 ///     teardown_params: TeardownParams,
 /// ) -> impl FnOnce(F) -> T {
 ///     move |f: F| {
