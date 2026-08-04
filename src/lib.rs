@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright Open Network Fabric Authors
 
+// We want to show how we decorate tests, so we need to use #[test] in docs snippets; they're not
+// supposed to be doctests we would run.
+#![allow(clippy::test_attr_in_doctest)]
+
 //! `fixin` is a very simple test fixture tool.
 //!
 //! The idea is to wrap arbitrary tests in other functions (which are responsible for setup and
@@ -54,13 +58,13 @@ use syn::{ExprCall, ItemFn, parse_macro_input};
 /// Imagine you have
 ///
 /// ```
-/// # struct SetupParms;
+/// # struct SetupParams;
 /// # struct TeardownParams;
-/// # fn do_setup(_: SetupParms) {}
+/// # fn do_setup(_: SetupParams) {}
 /// # fn do_teardown(_: TeardownParams) {}
 /// #[test]
 /// fn test_which_needs_setup_and_teardown() {
-///     do_setup(SetupParms);
+///     do_setup(SetupParams);
 ///     // ... test logic ...
 ///     do_teardown(TeardownParams);
 /// }
@@ -78,14 +82,14 @@ use syn::{ExprCall, ItemFn, parse_macro_input};
 /// Then you can write
 ///
 /// ```
-/// # struct SetupParms;
+/// # struct SetupParams;
 /// # struct TeardownParams;
-/// # fn do_setup(_: SetupParms) {}
+/// # fn do_setup(_: SetupParams) {}
 /// # fn do_teardown(_: TeardownParams) {}
 /// # use std::panic::{catch_unwind, RefUnwindSafe, UnwindSafe};
 ///
 /// fn with_setup_and_teardown<F: UnwindSafe + FnOnce() -> T, T>(
-///     setup_params: SetupParms,
+///     setup_params: SetupParams,
 ///     teardown_params: TeardownParams,
 /// ) -> impl FnOnce(F) -> T {
 ///     move |f: F| {
@@ -109,7 +113,7 @@ use syn::{ExprCall, ItemFn, parse_macro_input};
 /// }
 /// ```
 #[proc_macro_attribute]
-#[proc_macro_error2::proc_macro_error]
+#[proc_macro_error3::proc_macro_error]
 pub fn wrap(args: TokenStream, input: TokenStream) -> TokenStream {
     let args = parse_macro_input!(args as ExprCall);
 
